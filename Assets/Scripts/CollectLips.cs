@@ -24,17 +24,17 @@ public class CollectLips : MonoBehaviour
             Follow();
         }
     }
-    public void OnTriggerEnter(Collider other)
-    {
-        if ( other.gameObject.tag == "Player")
-        {
-            minDistance = PlayerPrefs.GetInt("distance") + 2;
-            PlayerPrefs.SetInt("distance", minDistance);
-            PlayerPrefs.Save();
-            Debug.Log("Fuck it");
-            _folloowit = true;
-        }
-    }
+    //public void OnTriggerEnter(Collider other)
+    //{
+    //    if ( other.gameObject.tag == "Player")
+    //    {
+    //        minDistance = PlayerPrefs.GetInt("distance") + 2;
+    //        PlayerPrefs.SetInt("distance", minDistance);
+    //        PlayerPrefs.Save();
+    //      
+    //        _folloowit = true;
+    //    }
+    //}
     void Follow()
     {
         transform.LookAt(Player);
