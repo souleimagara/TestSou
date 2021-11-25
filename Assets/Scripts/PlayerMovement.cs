@@ -9,7 +9,8 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody rb;
     private bool playState;
     public GameObject prefab;
-    int offset1 = 2;
+    public static int offset1 = 2;
+    public GameObject Player;
 
     [SerializeField] private Joystick joystick;
     [SerializeField] private float sideForce;
@@ -21,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
     List<Transform> unityGameObjects = new List<Transform>();
     //Camera
     public Transform target;
-    public float offsetZ = -3;
+    public  float offsetZ = -3;
 
     public float smoothX;
     public Camera cam;
@@ -60,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
            
             //other.GetComponent<Animator>().SetTrigger("Run");
             Destroy(other.gameObject);
-            //other.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + x  );
+           
             GameObject SpawnedStandMini = Instantiate(prefab, new Vector3(transform.position.x, transform.position.y, transform.position.z) + (Vector3.forward * offset1), transform.rotation) as GameObject;
             SpawnedStandMini.name = "F1V0";
             SpawnedStandMini.GetComponent<Animator>().SetTrigger("Run");
@@ -72,6 +73,12 @@ public class PlayerMovement : MonoBehaviour
             if ( this.gameObject.transform.childCount == 1)
             {
                 rb.AddForce(Vector3.back * 50000.0f);
+                Player.gameObject.name = "Player_V0";
+                Player.transform.GetChild(4).GetChild(0).gameObject.SetActive(true);
+                Player.transform.GetChild(4).GetChild(1).gameObject.SetActive(false);
+                Player.transform.GetChild(4).GetChild(2).gameObject.SetActive(false);
+                Player.transform.GetChild(4).GetChild(3).gameObject.SetActive(false);
+
             }
            
         }
