@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private GameObject Camera;
     [SerializeField] private GameObject winPanel, losePanel;
 
-    List<Transform> unityGameObjects = new List<Transform>();
+   
     //Camera
     public Transform target;
     public  float offsetZ = -3;

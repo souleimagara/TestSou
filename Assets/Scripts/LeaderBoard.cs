@@ -5,10 +5,14 @@ using UnityEngine;
 public class LeaderBoard : MonoBehaviour
 {
     public GameObject Panel;
-    private void OnTriggerEnter2D(Collider2D collision)
+    public GameObject Player;
+   
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.tag == "Friend")
+        
+        if (other.gameObject.tag == "Player")
         {
+            Player.SetActive(false);
             Panel.SetActive(true);
         }
     }
