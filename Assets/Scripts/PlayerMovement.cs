@@ -8,7 +8,6 @@ public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody rb;
     private bool playState;
-    public Transform Friend;
     public GameObject prefab;
     int offset1 = 2;
 
@@ -65,8 +64,16 @@ public class PlayerMovement : MonoBehaviour
             GameObject SpawnedStandMini = Instantiate(prefab, new Vector3(transform.position.x, transform.position.y, transform.position.z) + (Vector3.forward * offset1), transform.rotation) as GameObject;
             SpawnedStandMini.name = "F1V0";
             SpawnedStandMini.GetComponent<Animator>().SetTrigger("Run");
-            SpawnedStandMini.transform.SetParent(Friend);
+            SpawnedStandMini.transform.SetParent(this.gameObject.transform);
             offset1 = offset1 + 2;
+        }
+        else if (other.gameObject.tag == "Wall")
+        {
+            if ( this.gameObject.transform.childCount == 1)
+            {
+                rb.AddForce(Vector3.back * 50000.0f);
+            }
+           
         }
     }
 
