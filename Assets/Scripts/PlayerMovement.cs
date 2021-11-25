@@ -7,15 +7,25 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody rb;
     private bool playState;
 
+
     [SerializeField] private Joystick joystick;
     [SerializeField] private float sideForce;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float minX, maxX;
     [SerializeField] private GameObject Camera;
     [SerializeField] private GameObject winPanel, losePanel;
-    public Animator anim;
+
+
+    //Camera
+    public Transform target;
+    public float offsetZ = -3;
+
+    public float smoothX;
+    public Camera cam;
+
     private void Start()
     {
+      
         rb = GetComponent<Rigidbody>();
         playState = true;
 
@@ -34,10 +44,20 @@ public class PlayerMovement : MonoBehaviour
        
     }
 
-
-
-    void Restart()
+    private void LateUpdate()
     {
-        SceneManager.LoadScene("SampleScene");
+        cam.transform.position = new Vector3
+           (Mathf.Lerp(cam.transform.position.x, target.transform.position.x, smoothX * Time.deltaTime), cam.transform.position.y, target.transform.position.z + offsetZ);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if ( other.gameObject.tag == "Friend")
+        {
+            other.GetComponent<Animator>().SetTrigger("Run");
+            other.transform.SetParent(this.gameObject.transform);
+            other.transform.position = new Vector3(transform.position.x, other.gameObject.transform.position.y, other.gameObject.transform.position.z);
+        }
+    }
+
 }
