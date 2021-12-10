@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,11 @@ public class WallLeft : MonoBehaviour
 {
     public GameObject[] ImageLeft;
     public ParticleSystem explosion;
-    int count = 0; 
+    float currentMovementTime = 0f;
+    int count = 0;
+    public float smoothTime = 0.3F;
+    private Vector3 velocity = Vector3.zero;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Friend")
@@ -32,7 +37,17 @@ public class WallLeft : MonoBehaviour
                 ImageLeft[count].SetActive(true);
             }
             explosion.Play();
-            other.transform.position += Vector3.back * 10;
+            other.transform.position += (Vector3.back * 500) * Time.deltaTime;
+
+
+
+            Vector3 targetPosition = other.transform.TransformPoint(new Vector3(0, 0, -5));
+            other.transform.position = Vector3.SmoothDamp(other.transform.position, targetPosition, ref velocity, smoothTime);
+
+
+            //currentMovementTime += Time.deltaTime;
+            //Vector3 spawnPosition = new Vector3(other.transform.position.x, other.transform.position.y, other.transform.position.z -5f);
+            //other.transform.localPosition = Vector3.Lerp(other.transform.position, spawnPosition, currentMovementTime / 5f);
         }
 
         IEnumerator waiteforfewsecond()
@@ -43,5 +58,8 @@ public class WallLeft : MonoBehaviour
                 item.SetActive(false);
             }
         }
+
+
+      
     }
 }

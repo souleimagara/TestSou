@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 
 public class LipsPart : MonoBehaviour
@@ -48,22 +49,25 @@ public class LipsPart : MonoBehaviour
     {
         if ( other.gameObject.tag == "Wall")
         {
-            
+           
             switch (this.gameObject.name)
             {
                 case "Player_V0":
                     lips1.SetActive(false);
                     lips2.SetActive(true);
+                    lips2.transform.DOScale(1, 1.1f).From(true);
                     this.gameObject.name = "Player_V1";
                     break;
                 case "Player_V1":
                     lips2.SetActive(false);
                     lips3.SetActive(true);
+                    lips3.transform.DOScale(1, 1.1f).From(true);
                     this.gameObject.name = "Player_V2";
                     break;
                 case "Player_V2":
                     lips3.SetActive(false);
                     lips4.SetActive(true);
+                    lips4.transform.DOScale(1, 1.2f).From(true);
                     this.gameObject.name = "Player_V3";
                     break;
             }
@@ -94,6 +98,7 @@ public class LipsPart : MonoBehaviour
            else
             {
                 transform.position += Vector3.back * 10 ;
+                //transform.DOMove(transform.position, 5);
 
                 Transform parent = this.transform.parent.gameObject.transform;
                 foreach (Transform item in parent)
