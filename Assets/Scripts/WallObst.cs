@@ -13,9 +13,13 @@ public class WallObst : MonoBehaviour
         {
             ImageRight.SetActive(true);
             particalsystem.SetActive(true);
+            Transform lip = other.transform.parent;
+            LipsMovment lipscom = lip.GetComponent<LipsMovment>();
+            lipscom.remmovepart(other.gameObject);
             Destroy(other.gameObject);
-            PlayerMovement.offset1 = PlayerMovement.offset1 - 2;
+         
         }
+       
        
     }
 }

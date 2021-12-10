@@ -11,15 +11,28 @@ public class WallLeft : MonoBehaviour
     {
         if (other.gameObject.tag == "Friend")
         {
-            count = count + 1 ;
-            if ( count <= 3 )
+            count = count + 1;
+            if (count <= 3)
+            {
+                ImageLeft[count].SetActive(true);
+                count = 0;
+            }
+            explosion.Play();
+            Transform snake = other.transform.parent;
+            LipsMovment snakeComponent = snake.GetComponent<LipsMovment>();
+            snakeComponent.remmovepart(other.gameObject);
+            Destroy(other.gameObject);
+            StartCoroutine(waiteforfewsecond());
+        }
+        if (other.gameObject.tag == "lipeHead")
+        {
+            count = count + 1;
+            if (count <= 3)
             {
                 ImageLeft[count].SetActive(true);
             }
             explosion.Play();
-            Destroy(other.gameObject);
-            PlayerMovement.offset1 = PlayerMovement.offset1 - 2;
-            StartCoroutine(waiteforfewsecond());
+            other.transform.position += Vector3.back * 10;
         }
 
         IEnumerator waiteforfewsecond()

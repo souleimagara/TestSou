@@ -6,6 +6,13 @@ TagManager:
   tags:
   - Friend
   - Wall
+  - Crystal
+  - CollisionCone
+  - People
+  - SnakeHead
+  - Enemy
+  - Block
+  - lipeHead
   layers:
   - Default
   - TransparentFX

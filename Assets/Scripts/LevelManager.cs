@@ -1,18 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+   
+    public Text levelNAme;
+    private void Start()
     {
+
+       
+            string levelname = PlayerPrefs.GetString("NAmeLevel");
+            if (!string.IsNullOrEmpty(levelname))
+            {
+                levelNAme.text = levelname;
+            }
+           
         
+
+
     }
 
-    // Update is called once per frame
-    void Update()
+ 
+
+    public void CallLevelTwo()
     {
-        
+        SceneManager.LoadScene("Level2");
+    }
+    public void CallLevelOneAsThree()
+    {
+        SceneManager.LoadScene("LevelMain");
+        PlayerPrefs.SetString("NAmeLevel", "Level Three");
+        PlayerPrefs.Save();
     }
 }
