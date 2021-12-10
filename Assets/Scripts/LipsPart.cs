@@ -97,9 +97,11 @@ public class LipsPart : MonoBehaviour
            }
            else
             {
-                transform.position += Vector3.back * 10 ;
-                //transform.DOMove(transform.position, 5);
+                //transform.position += Vector3.back * 10 ;
+                ////transform.DOMove(transform.position, 5);
 
+                float offset = -5f; //how much to move forward
+                transform.DOMove(transform.position + transform.forward * offset, 1f);
                 Transform parent = this.transform.parent.gameObject.transform;
                 foreach (Transform item in parent)
                 {

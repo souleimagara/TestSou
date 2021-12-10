@@ -37,12 +37,15 @@ public class WallLeft : MonoBehaviour
                 ImageLeft[count].SetActive(true);
             }
             explosion.Play();
-            other.transform.position += (Vector3.back * 500) * Time.deltaTime;
+            //other.transform.position += (Vector3.back * 500) * Time.deltaTime;
 
 
 
-            Vector3 targetPosition = other.transform.TransformPoint(new Vector3(0, 0, -5));
-            other.transform.position = Vector3.SmoothDamp(other.transform.position, targetPosition, ref velocity, smoothTime);
+            //Vector3 targetPosition = other.transform.TransformPoint(new Vector3(0, 0, -5));
+            //other.transform.position = Vector3.SmoothDamp(other.transform.position, targetPosition, ref velocity, smoothTime);
+
+            float offset = -5f; //how much to move forward
+            other.transform.DOMove(other.transform.position + other.transform.forward * offset, 1f);
 
 
             //currentMovementTime += Time.deltaTime;
